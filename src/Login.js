@@ -34,7 +34,10 @@ function Login() {
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        const login = await axios.post("http://localhost:8000/login", values);
+        const login = await axios.post(
+          "https://money-manager-backend-9yjg.onrender.com/login",
+          values
+        );
         if (login.data.token) {
           window.localStorage.setItem("token", login.data.token);
           message.success("Logged in Successfully");

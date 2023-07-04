@@ -26,7 +26,7 @@ function Homepage() {
       }
       console.log(values);
       const insertdata = await axios.post(
-        "http://localhost:8000/expense",
+        "https://money-manager-backend-9yjg.onrender.com/expense",
         values,
         {
           headers: {
@@ -51,12 +51,15 @@ function Homepage() {
       if (!token) {
         Navigate("/");
       }
-      const userdata = await axios.get("http://localhost:8000/expense", {
-        headers: {
-          authorization: token,
-          "Content-type": "application/json",
-        },
-      });
+      const userdata = await axios.get(
+        "https://money-manager-backend-9yjg.onrender.com/expense",
+        {
+          headers: {
+            authorization: token,
+            "Content-type": "application/json",
+          },
+        }
+      );
       setAllTransaction(userdata.data);
       console.log(userdata.data);
     } catch (error) {
