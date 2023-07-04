@@ -293,3 +293,27 @@ a:hover {
         font-size: 12px;
     }
 }
+
+.incomebtn{
+  display: flex;
+  justify-content: end;
+}
+
+.moneyicon{
+  color: #343a40;
+  -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: 1px;
+  font-family: sans-serif !important;
+  letter-spacing: 4px;
+  border: 1px;
+  font-size: 44px;
+  font-weight: 1000 !important;
+  line-height: 50px;
+    display: flex;
+  justify-content: end;
+}
+
+.logbtn{
+  display: flex;
+  justify-content: end;
+}

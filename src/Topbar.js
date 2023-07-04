@@ -6,11 +6,26 @@ function Topbar() {
   const Navigate = useNavigate();
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-        <a className="navbar-brand text-primary text" href="#">
-          <i className="fa-solid fa-piggy-bank fa-1x text-danger ml-5"></i>
+      <nav className="navbar navbar-expand-lg navbar-light bg-dark row">
+        <div className="moneyicon col-lg-6">
+          {" "}
           Money Manager
-        </a>
+          {/* <a className="navbar-brand text-primary text " href="#">
+            Money Manager
+          </a> */}
+        </div>
+        <div className="col-lg-6 logbtn">
+          <button
+            className="btn btn-outline-success my-2 my-sm-0 mr-5"
+            onClick={() => {
+              window.localStorage.removeItem("token");
+              Navigate("/");
+            }}
+            type="submit"
+          >
+            Log out
+          </button>
+        </div>
         <button
           className="navbar-toggler"
           type="button"
@@ -37,24 +52,7 @@ function Topbar() {
               <a className="nav-link" href="#"></a>
             </li>
           </ul>
-          <form className="form-inline my-2 my-lg-0">
-            <ul list-style-type="none">
-              <li>
-                <Popup />
-              </li>
-            </ul>
-
-            <button
-              className="btn btn-outline-success my-2 my-sm-0 mr-5"
-              onClick={() => {
-                window.localStorage.removeItem("token");
-                Navigate("/");
-              }}
-              type="submit"
-            >
-              Log out
-            </button>
-          </form>
+          <form className="form-inline my-2 my-lg-0"></form>
         </div>
       </nav>
     </>

@@ -1,3 +1,4 @@
+import { message } from "antd";
 import axios from "axios";
 import { useFormik } from "formik";
 import React, { useState } from "react";
@@ -6,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 function Login() {
   const Navigate = useNavigate();
   const [Login, setLogin] = useState([]);
+  const [Loading, setLoading] = useState(false);
   const myFormik = useFormik({
     initialValues: {
       email: "",
@@ -31,22 +33,19 @@ function Login() {
     },
     onSubmit: async (values) => {
       try {
-        const login = await axios.post("https://money-manager-backend-9yjg.onrender.com/login", values, {
-          headers: {
-            Authorization: `${window.localStorage.getItem("token")}`,
-          },
-        });
+        setLoading(true);
+        const login = await axios.post("http://localhost:8000/login", values);
         if (login.data.token) {
           window.localStorage.setItem("token", login.data.token);
+          message.success("Logged in Successfully");
           Navigate("/Homepage");
-        }
-        else
-        {
-          alert("Email/password is incorrect");
-
+        } else {
+          message.error("Email/password is incorrect");
+          setLoading(false);
         }
       } catch (error) {
-        alert("Email/password is incorrect");
+        setLoading(false);
+        message.failed("Email/password is incorrect");
         console.log("Error", error);
       }
     },
@@ -91,9 +90,12 @@ function Login() {
           </div>
           <span style={{ color: "red" }}>{myFormik.errors.password}</span>
 
-          <button className="btn mt-3" type="Submit">
-            Login
-          </button>
+          <input
+            disabled={Loading ? true : false}
+            className="btn mt-3"
+            type="Submit"
+            value={Loading ? "Logging in" : "Login"}
+          />
         </form>
         <div className="text-center fs-6">
           <a href="#">Forget password?</a> or{" "}
